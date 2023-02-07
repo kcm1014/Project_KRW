@@ -1,0 +1,130 @@
+body {
+    background-image: url("../img/university.jpg");
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+#button_area {
+    height: 300px;
+    width: 100%;
+}
+
+#logo_area {
+  position: relative;
+  margin: 0 auto;
+  width: 10em;
+  color: #ffffff;
+  border: .15em solid #ffffff;   /*78FFCD*/
+  border-radius: 5em;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 1.3em;
+  line-height: 2em;
+  cursor: pointer;
+}
+
+.dot {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: calc(10em*.2);
+  height: 100%;
+  border-radius: 100%;
+  transition: all 300ms ease;
+  display: none;
+}
+.dot:after {
+  content: '';
+  position: absolute;
+  left: calc(50% - .4em);
+  top: -.4em;
+  height: .8em;
+  width: .8em;
+  background: #ffffff;
+  border-radius: 1em;
+  border: .25em solid #fff;
+  box-shadow: 0 0 .7em #fff,
+        0 0 2em #ffffff;
+}
+
+#logo_area:hover .dot,
+#logo_area:focus .dot {
+  animation: atom 2s infinite linear;
+  display: block;
+}
+@keyframes atom {
+  0% {transform: translateX(0) rotate(0);}
+  30%{transform: translateX(calc(10em - calc(10em*.2))) rotate(0);}
+  50% {transform: translateX(calc(10em - calc(10em*.2))) rotate(180deg);}
+  80% {transform: translateX(0) rotate(180deg);}
+  100% {transform: translateX(0) rotate(360deg);}
+}
+
+#bottom_area {
+  position: relative;
+  margin: 200px auto;
+  text-align: center;
+  font-size: 2em;
+  line-height: 2em;
+  cursor: pointer;
+}
+
+.custom-btn {
+  width: 130px;
+  height: 40px;
+  padding: 10px 25px;
+  border: 2px solid #000;
+  font-family: 'Lato', sans-serif;
+  font-weight: 500;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  margin: 0 50px;
+  display: inline-block;
+}
+
+/* 5 */
+.btn-5 {
+  background: #000;
+  color: #fff;
+  line-height: 42px;
+  padding: 0;
+  border: none;
+}
+.btn-5:hover {
+  background: transparent;
+  color: #000;
+   box-shadow:
+   -7px -7px 20px 0px #fff9,
+   -4px -4px 5px 0px #fff9,
+   7px 7px 20px 0px #0002,
+   4px 4px 5px 0px #0001;
+}
+.btn-5:before,
+.btn-5:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #000;
+  transition:400ms ease all;
+}
+.btn-5:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+.btn-5:hover:before,
+.btn-5:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
