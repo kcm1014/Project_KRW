@@ -2,6 +2,10 @@ body {
     background-image: url("../img/university.jpg");
 }
 
+a {
+  color: white;
+  text-decoration: none;
+}
 .wrapper {
   display: flex;
   justify-content: center;

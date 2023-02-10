@@ -1,0 +1,110 @@
+body {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+    background-color: #FFFFFF;
+
+}
+
+.container {
+    /*border: 1px solid red;*/
+    width: 100%;
+    height: 100%;
+}
+
+.logo {
+    /*border: 1px solid blue;*/
+    width: 1024px;
+    height: 50px;
+    margin: 10px auto 10px;
+    background-color: black;
+    color: white;
+}
+
+.content {
+    border: 1px solid blue;
+    width: 1024px;
+    height: 550px;
+    margin: 10px auto ;
+}
+
+.content table{
+    table-layout: fixed;
+    border-collapse: separate;
+    border-spacing: 2px;
+}
+
+.content table th{
+    background: #999;
+    color: #fff;
+}
+
+.content table th, td{
+    height: 30px;
+    text-align: center;
+}
+
+select {
+    width: 200px;
+    padding: .4em .1em .4em .5em;
+    border: 1px solid #999;
+    font-family: inherit;
+    background: url('../img/arrow.jpg') no-repeat 95% 50%;
+    border-radius: 0px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+#category,#subcategory {
+    float: left;
+}
+
+.starpoint{
+    display: flex;
+    width: 145px;
+    height : 50px;
+    border: 1px solid darkslategray;
+    float: left;
+    margin-left: 2px;
+    align-items: center;
+    justify-content: center;
+}
+
+.starpointbottom{
+    display: flex;
+    width: 145px;
+    height : 50px;
+    float: left;
+    margin-left: 2px;
+    align-items: center;
+    justify-content: center;
+}
+
+.star {
+    position: relative;
+    font-size: 1rem;
+    color: #ddd;
+  }
+
+  .star input {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  .star span {
+    width: 0;
+    position: absolute;
+    left: 0;
+    color: red;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  textarea {
+      width: 1024px;
+  }
