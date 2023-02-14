@@ -24,4 +24,67 @@
     document.querySelector(`.star #satr06`).style.width = `${target.value * 20}%`;
   }
 
+  $(document).ready(function (){
+    $('#category').change(function (){
+        if($('#category option:selected').val() == "empty"){
+            $("select#subcategory option").remove();
+            return;
+        }
 
+      $.get('/rate/get_subcategory/',
+          {
+              id: $('#category option:selected').val()
+          },
+          function(data, status){
+             if(status == 'success') {
+                 $("select#subcategory option").remove();
+                  for(let i=0;i<data.length;i++){
+                     $("select#subcategory").append("<option value='" + data[i].pk + "'>" + data[i].fields['subcategory_name'] + "</option>");
+                  }
+             }
+         }
+      );
+    });
+
+    $('#writeData').click(function (){
+        //카테고리 정보
+        if($('#category option:selected').val() == "empty"){
+            alert("카테고리를 선택하세요!");
+            return;
+        }
+
+         if($('#subcategory option:selected').val() == ""){
+            alert("서브 카테고리를 선택하세요!");
+            return;
+        }
+
+         let count = 0;
+         if($('#startpoint01').val()=='0') count++;
+         if($('#startpoint02').val()=='0') count++;
+         if($('#startpoint03').val()=='0') count++;
+         if($('#startpoint04').val()=='0') count++;
+         if($('#startpoint05').val()=='0') count++;
+         if($('#startpoint06').val()=='0') count++;
+         if(count > 3){
+             alert("3개 이상의 별점을 선택하세요!");
+             return;
+         }
+
+         if($('#content').val().trim()==""){
+              alert("작성 내용을 입력하세요!");
+             return;
+         }
+
+         if($('#userId').val().trim()==""){
+              alert("작성자 이름을 입력하세요!");
+             return;
+         }
+
+         if($('#userpwd').val().trim()==""){
+              alert("패스워드를 입력하세요!");
+             return;
+         }
+
+         $('#dataWrite').submit();
+    });
+  });

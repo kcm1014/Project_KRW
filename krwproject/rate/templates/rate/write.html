@@ -12,7 +12,8 @@
             <h2>Logo</h2>
         </div>
         <div class="content">
-            <form action="" method="POST">
+            <form action="/rate/write_data/" method="POST" id="dataWrite">
+                {% csrf_token %}
                 <table>
                     <colgroup>
                         <col style="width: 112px">
@@ -24,12 +25,10 @@
                         <th>Category</th>
                         <td>
                             <select name="category" id="category">
-                                <option value=""></option>
-                                <option value="영어">영어</option>
-                                <option value="수학">수학</option>
-                                <option value="사회">사회</option>
-                                <option value="과학">과학</option>
-                                <option value="미술">미술</option>
+                                <option value="empty"></option>
+                                {% for category in category_list%}
+                                     <option value="{{category.id}}">{{category.category_name}}</option>
+                                {% endfor %}
                             </select>
                         </td>
                         <th>Sub Category</th>
@@ -59,55 +58,67 @@
                                 <span class="star">
                                   ★★★★★
                                   <span id="satr01">★★★★★</span>
-                                  <input type="range" oninput="drawStar01(this)" value="1" step="1" min="0" max="5">
+                                  <input type="range" oninput="drawStar01(this)" value="0" step="1" min="0" max="5" id="startpoint01" name="startpoint01">
                                 </span>
                             </div>
                             <div class="starpointbottom">
                                 <span class="star">
                                   ★★★★★
                                   <span id="satr02">★★★★★</span>
-                                  <input type="range" oninput="drawStar02(this)" value="1" step="1" min="0" max="5">
+                                  <input type="range" oninput="drawStar02(this)" value="0" step="1" min="0" max="5" id="startpoint02" name="startpoint02">
                                 </span>
                             </div>
                             <div class="starpointbottom">
                                 <span class="star">
                                   ★★★★★
                                   <span id="satr03">★★★★★</span>
-                                  <input type="range" oninput="drawStar03(this)" value="1" step="1" min="0" max="5">
+                                  <input type="range" oninput="drawStar03(this)" value="0" step="1" min="0" max="5" id="startpoint03" name="startpoint03">
                                 </span>
                             </div>
                             <div class="starpointbottom">
                                 <span class="star">
                                   ★★★★★
                                   <span id="satr04">★★★★★</span>
-                                  <input type="range" oninput="drawStar04(this)" value="1" step="1" min="0" max="5">
+                                  <input type="range" oninput="drawStar04(this)" value="0" step="1" min="0" max="5" id="startpoint04" name="startpoint04">
                                 </span>
                             </div>
                             <div class="starpointbottom">
                                 <span class="star">
                                   ★★★★★
                                   <span id="satr05">★★★★★</span>
-                                  <input type="range" oninput="drawStar05(this)" value="1" step="1" min="0" max="5">
+                                  <input type="range" oninput="drawStar05(this)" value="0" step="1" min="0" max="5" id="startpoint05" name="startpoint05">
                                 </span>
                             </div>
                             <div class="starpointbottom">
                                 <span class="star">
                                   ★★★★★
                                   <span id="satr06">★★★★★</span>
-                                  <input type="range" oninput="drawStar06(this)" value="1" step="1" min="0" max="5">
+                                  <input type="range" oninput="drawStar06(this)" value="0" step="1" min="0" max="5" id="startpoint06" name="startpoint06">
                                 </span>
                             </div>
                         </td>
                     </tr>
                     <tr>
                         <td colspan="4">
-                            <textarea name="content" cols="142" rows="23" id="content"></textarea>
+                            <textarea name="content" cols="120" rows="23" id="content"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Name</th>
+                        <td><input type="text" name="userId" maxlength="20" id="userId"></td>
+                        <th>Password</th>
+                        <td><input type="password" name="userpwd" maxlength="4" id="userpwd"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" id="btnSubmit" >
+                            <button type="button" value="Write" id="writeData">Write</button>
                         </td>
                     </tr>
                 </table>
             </form>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
     <script src="{% static 'js/rate_write.js'%}"></script>
 </body>
 </html>
