@@ -9,7 +9,9 @@
 <body>
     <div class="container">
         <div class="logo">
-            <h2>Logo</h2>
+            <span class="logText">
+               New Write
+            </span>
         </div>
         <div class="content">
             <form action="/rate/write_data/" method="POST" id="dataWrite">
@@ -25,7 +27,6 @@
                         <th>Category</th>
                         <td>
                             <select name="category" id="category">
-                                <option value="empty"></option>
                                 {% for category in category_list%}
                                      <option value="{{category.id}}">{{category.category_name}}</option>
                                 {% endfor %}
@@ -34,9 +35,9 @@
                         <th>Sub Category</th>
                         <td>
                             <select name="subcategory" id="subcategory">
-                                <option value="9학년">9학년</option>
-                                <option value="10학년">10학년</option>
-                                <option value="11학년">11학년</option>
+                                {% for subcategory in subcategory_list%}
+                                     <option value="{{subcategory.id}}">{{subcategory.subcategory_name}}</option>
+                                {% endfor %}
                             </select>
                         </td>
                     </tr>
@@ -112,6 +113,7 @@
                     <tr>
                         <td colspan="4" id="btnSubmit" >
                             <button type="button" value="Write" id="writeData">Write</button>
+                            <button type="button" value="goList" id="goList">List</button>
                         </td>
                     </tr>
                 </table>

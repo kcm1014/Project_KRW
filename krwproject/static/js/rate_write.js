@@ -87,4 +87,10 @@
 
          $('#dataWrite').submit();
     });
+
+    $('#goList').click(function (){
+        console.log("ok");
+        location.href = "/rate/list/";
+    });
+
   });
