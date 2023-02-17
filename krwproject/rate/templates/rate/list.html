@@ -14,47 +14,48 @@
             </span>
         </div>
         <div class="content">
-            <form action="/rate/write_data/" method="POST" id="dataWrite">
-                {% csrf_token %}
-                <table>
-                    <colgroup>
-                        <col style="width: 112px">
-                        <col style="width: 250px">
-                        <col style="width: 112px">
-                        <col style="width: 250px">
-                        <col style="width: 200px">
-                        <col style="width: 100px">
-                    </colgroup>
-                    <tr>
-                        <th>Category</th>
-                        <td>
-                            <select name="category" id="category">
-                                {% for category in category_list%}
-                                     <option value="{{category.id}}">{{category.category_name}}</option>
-                                {% endfor %}
-                            </select>
-                        </td>
-                        <th>Sub Category</th>
-                        <td>
-                            <select name="subcategory" id="subcategory">
-                                {% for subcategory in subcategory_list%}
-                                     <option value="{{subcategory.id}}">{{subcategory.subcategory_name}}</option>
-                                {% endfor %}
-                            </select>
-                        </td>
-                        <td>
-                            <input type="radio" value="asending" name="sort" id="sortAsending" checked>
-                                <label for="sortAsending">Latest</label>
-                            <input type="radio" value="descending" name="sort" id="sortDescending">
-                                <label for="sortDescending">Old</label>
-                        </td>
-                        <td>
-                            <button type="button" value="Search" id="Search">Search</button>
-                        </td>
-                    </tr>
-                </table>
-            </form>
-
+            <div class="search">
+                <form action="/rate/write_data/" method="POST" id="dataWrite">
+                    {% csrf_token %}
+                    <table>
+                        <colgroup>
+                            <col style="width: 112px">
+                            <col style="width: 250px">
+                            <col style="width: 112px">
+                            <col style="width: 250px">
+                            <col style="width: 200px">
+                            <col style="width: 100px">
+                        </colgroup>
+                        <tr>
+                            <th>Category</th>
+                            <td>
+                                <select name="category" id="category">
+                                    {% for category in category_list%}
+                                         <option value="{{category.id}}">{{category.category_name}}</option>
+                                    {% endfor %}
+                                </select>
+                            </td>
+                            <th>Sub Category</th>
+                            <td>
+                                <select name="subcategory" id="subcategory">
+                                    {% for subcategory in subcategory_list%}
+                                         <option value="{{subcategory.id}}">{{subcategory.subcategory_name}}</option>
+                                    {% endfor %}
+                                </select>
+                            </td>
+                            <td>
+                                <input type="radio" value="asending" name="sort" id="sortAsending" checked>
+                                    <label for="sortAsending">Latest</label>
+                                <input type="radio" value="descending" name="sort" id="sortDescending">
+                                    <label for="sortDescending">Old</label>
+                            </td>
+                            <td>
+                                <button type="button" value="Search" id="Search">Search</button>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
              <table id="contentList">
                  <colgroup>
                     <col style="width: 112px">
@@ -64,75 +65,89 @@
                     <col style="width: 112px">
                     <col style="width: 228px">
                  </colgroup>
-                 {% for content in content_list%}
-                 <tr>
-                     <td colspan="6" style="height: 2px;"></td>
-                 </tr>
-                 <tr>
-                     <td colspan="6" style="height: 1px;background: black;"></td>
-                 </tr>
-                <tr>
-                    <th>Category</th>
-                    <td>{{content.category.category_name}}</td>
-                    <th>Sub Category</th>
-                    <td>{{content.subcategory.subcategory_name}}</td>
-                    <th>Write Date</th>
-                    <td>{{content.create_date}}</td>
-                </tr>
-                 <tr>
-                      <th rowspan="2">별점</th>
-                      <td colspan="5">
-                          <div class="starpoint">workload<br>(daily HW)</div>
-                          <div class="starpoint">Test Frequency</div>
-                          <div class="starpoint">Strictness</div>
-                          <div class="starpoint">class material</div>
-                          <div class="starpoint">Standarized</div>
-                          <div class="starpoint">Use of Tech</div>
-                      </td>
-                 </tr>
-                 <tr>
-                     <td colspan="5">
-                        <div class="starpointbottom">
-                           <span class="star">
-                                  ★★★★★
-                              <span id="satr01">★★★★★</span>
-                           </span>
-                        </div>
-                        <div class="starpointbottom">
-                            <span class="star">
-                              ★★★★★
-                            </span>
-                        </div>
-                        <div class="starpointbottom">
-                            <span class="star">
-                              ★★★★★
-                            </span>
-                        </div>
-                        <div class="starpointbottom">
-                            <span class="star">
-                              ★★★★★
-                            </span>
-                        </div>
-                        <div class="starpointbottom">
-                            <span class="star">
-                              ★★★★★
-                            </span>
-                        </div>
-                        <div class="starpointbottom">
-                            <span class="star">
-                              ★★★★★
-                            </span>
-                        </div>
-                    </td>
-                 </tr>
-                 <tr>
-                    <td colspan="6" style="text-align: left">
-                        <span id="strcontents" >
-                        {{content.contents}}
-                        </span>
-                    </td>
-                </tr>
-                 {% endfor %}
+                 {% if content_list %}
+                    {% for content in content_list%}
+                        <tbody class="itemSelected" >
+                            <input type="hidden" value="{{content.pk}}"/>
+                             <tr>
+                                 <td colspan="6" style="height: 10px;"></td>
+                             </tr>
+                             <tr>
+                                 <td colspan="6" style="height: 1px;background: black;"></td>
+                             </tr>
+                            <tr>
+                                <th>Category</th>
+                                <td>{{content.category.category_name}}</td>
+                                <th>Sub Category</th>
+                                <td>{{content.subcategory.subcategory_name}}</td>
+                                <th>Write Date</th>
+                                <td>{{content.create_date}}</td>
+                            </tr>
+                             <tr>
+                                  <th rowspan="2">별점</th>
+                                  <td colspan="5">
+                                      <div class="starpoint">workload<br>(daily HW)</div>
+                                      <div class="starpoint">Test Frequency</div>
+                                      <div class="starpoint">Strictness</div>
+                                      <div class="starpoint">class material</div>
+                                      <div class="starpoint">Standarized</div>
+                                      <div class="starpoint">Use of Tech</div>
+                                  </td>
+                             </tr>
+                             <tr>
+                                 <td colspan="5">
+                                    <div class="starpointbottom">
+                                       <span class="star">
+                                              ★★★★★
+                                          <span id="satr01" style="width: {{content.getPoint01}}%">★★★★★</span>
+                                       </span>
+                                    </div>
+                                    <div class="starpointbottom">
+                                        <span class="star">
+                                          ★★★★★
+                                             <span id="satr01" style="width: {{content.getPoint02}}%">★★★★★</span>
+                                        </span>
+                                    </div>
+                                    <div class="starpointbottom">
+                                        <span class="star">
+                                          ★★★★★
+                                             <span id="satr01" style="width: {{content.getPoint03}}%">★★★★★</span>
+                                        </span>
+                                    </div>
+                                    <div class="starpointbottom">
+                                        <span class="star">
+                                          ★★★★★
+                                             <span id="satr01" style="width: {{content.getPoint04}}%">★★★★★</span>
+                                        </span>
+                                    </div>
+                                    <div class="starpointbottom">
+                                        <span class="star">
+                                          ★★★★★
+                                             <span id="satr01" style="width: {{content.getPoint05}}%">★★★★★</span>
+                                        </span>
+                                    </div>
+                                    <div class="starpointbottom">
+                                        <span class="star">
+                                          ★★★★★
+                                             <span id="satr01" style="width: {{content.getPoint06}}%">★★★★★</span>
+                                        </span>
+                                    </div>
+                                </td>
+                             </tr>
+                             <tr>
+                                <td colspan="6" style="text-align: left">
+                                    <span id="strcontents" >
+                                    {{content.contents}}
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                     {% endfor %}
+                 {% else %}
+                    <tr>
+                        <td colspan="6">데이터가 존재하지 않습니다!</td>
+                    </tr>
+                 {% endif %}
             </table>
         </div>
 

@@ -24,3 +24,16 @@ class RateContent(models.Model):
     contents =  models.TextField()
     userId = models.CharField(max_length=20)
     userPwd = models.CharField(max_length=4)
+
+    def getPoint01(self):
+        return self.point01 * 20
+    def getPoint02(self):
+        return self.point02 * 20
+    def getPoint03(self):
+        return self.point03 * 20
+    def getPoint04(self):
+        return self.point04 * 20
+    def getPoint05(self):
+        return self.point05 * 20
+    def getPoint06(self):
+        return self.point06 * 20

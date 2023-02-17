@@ -1,7 +1,9 @@
+from django.http import Http404
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse,HttpResponseRedirect
 from .models import Category, SubCategory, RateContent
 from django.core import serializers
+from django.urls import reverse
 from django.db.models import Q
 # Create your views here.
 
@@ -43,10 +45,39 @@ def writeData(request):
 
     rc.save()
 
-    return HttpResponse("OOK")
+    return HttpResponseRedirect(reverse('rate:showResult', args=(rc.pk, 2)))
 
 def getSubcategory(request):
     subcategory_list = SubCategory.objects.filter(subcategory_id=request.GET['id']).order_by('subcategory_order')
     data = serializers.serialize("json",subcategory_list)
     return HttpResponse(data,content_type="text/json-comment-filtered")
+
+
+def detail(request,ratecontent_id):
+    try:
+
+        ratecontent = RateContent.objects.get(pk=ratecontent_id)
+    except RateContent.DoesNotExist:
+        raise Http404("RateContent does not exist")
+    return render(request, 'rate/detail.html', {'ratecontent': ratecontent})
+
+def delete(request,ratecontent_id):
+    try:
+        ratecontent = RateContent.objects.get(pk=ratecontent_id)
+        userId = request.POST['userId']
+        userPwd = request.POST['userpwd']
+        if (ratecontent.userId == userId and ratecontent.userPwd == userPwd):
+            ratecontent.delete()
+            return HttpResponseRedirect(reverse('rate:showResult', args=(ratecontent_id, 1)))
+        else:
+            return HttpResponseRedirect(reverse('rate:showResult',args=(ratecontent_id,0)))
+    except RateContent.DoesNotExist:
+        raise Http404("RateContent does not exist")
+
+
+def showResult(request,ratecontent_id,result_code):
+    # 1 삭제 성공
+    # 0 삭제 실패
+    context = {'ratecontent_id': ratecontent_id, 'result_code': result_code}
+    return render(request, 'rate/result.html', context)
 

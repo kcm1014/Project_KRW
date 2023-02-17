@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="hidden" value="{{ratecontent_id}}" id="ratecontentId" />
+<input type="hidden" value="{{result_code}}" id="resultCode" />
+<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+<script src="{% static 'js/rate_result.js'%}"></script>
+</body>
+</html>

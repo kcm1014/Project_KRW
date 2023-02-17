@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Content Detail</title>
+    <link rel="stylesheet" href="{% static 'css/rate_detail.css'%}">
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <span class="logText">
+               Content Detail
+            </span>
+        </div>
+        <div class="content">
+            <form action="/rate/update_data/" method="POST" id="contentData">
+                {% csrf_token %}
+                <input type="hidden" value="{{ratecontent.pk}}" id="pk"/>
+                <input type="hidden" value="{{msg}}" id="msg"/>
+                <table>
+                    <colgroup>
+                        <col style="width: 112px">
+                        <col style="width: 400px">
+                        <col style="width: 112px">
+                        <col style="width: 400px">
+                    </colgroup>
+                    <tr>
+                        <th>Category</th>
+                        <td>
+                            {{ratecontent.category.category_name}}
+                        </td>
+                        <th>Sub Category</th>
+                        <td>
+                            {{ratecontent.subcategory.subcategory_name}}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th rowspan="2">별점</th>
+                        <td colspan="3">
+                            <div class="starpoint">workload<br>(daily HW)</div>
+                            <div class="starpoint">Test Frequency</div>
+                            <div class="starpoint">Strictness</div>
+                            <div class="starpoint">class material</div>
+                            <div class="starpoint">Standarized</div>
+                            <div class="starpoint">Use of Tech</div>
+                        </td>
+                    </tr>
+                     <tr>
+                        <td colspan="3">
+                            <div class="starpointbottom">
+                                <span class="star">
+                                  ★★★★★
+                                  <span id="satr01" style="width: {{ratecontent.getPoint01}}%">★★★★★</span>
+                                  <input type="range" oninput="drawStar01(this)" value="{{ratecontent.point01}}" step="1" min="0" max="5" id="startpoint01" name="startpoint01">
+                                </span>
+                            </div>
+                            <div class="starpointbottom">
+                                <span class="star">
+                                  ★★★★★
+                                  <span id="satr02" style="width: {{ratecontent.getPoint02}}%">★★★★★</span>
+                                  <input type="range" oninput="drawStar02(this)" value="{{ratecontent.point02}}" step="1" min="0" max="5" id="startpoint02" name="startpoint02">
+                                </span>
+                            </div>
+                            <div class="starpointbottom">
+                                <span class="star">
+                                  ★★★★★
+                                  <span id="satr03" style="width: {{ratecontent.getPoint03}}%">★★★★★</span>
+                                  <input type="range" oninput="drawStar03(this)" value="{{ratecontent.point03}}" step="1" min="0" max="5" id="startpoint03" name="startpoint03">
+                                </span>
+                            </div>
+                            <div class="starpointbottom">
+                                <span class="star">
+                                  ★★★★★
+                                  <span id="satr04" style="width: {{ratecontent.getPoint04}}%">★★★★★</span>
+                                  <input type="range" oninput="drawStar04(this)" value="{{ratecontent.point04}}" step="1" min="0" max="5" id="startpoint04" name="startpoint04">
+                                </span>
+                            </div>
+                            <div class="starpointbottom">
+                                <span class="star">
+                                  ★★★★★
+                                  <span id="satr05" style="width: {{ratecontent.getPoint05}}%">★★★★★</span>
+                                  <input type="range" oninput="drawStar05(this)" value="{{ratecontent.point05}}" step="1" min="0" max="5" id="startpoint05" name="startpoint05">
+                                </span>
+                            </div>
+                            <div class="starpointbottom">
+                                <span class="star">
+                                  ★★★★★
+                                  <span id="satr06" style="width: {{ratecontent.getPoint06}}%">★★★★★</span>
+                                  <input type="range" oninput="drawStar06(this)" value="{{ratecontent.point06}}" step="1" min="0" max="5" id="startpoint06" name="startpoint06">
+                                </span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            <textarea name="content" cols="120" rows="23" id="content" >{{ratecontent.contents}}</textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Name</th>
+                        <td><input type="text" name="userId" maxlength="20" id="userId"></td>
+                        <th>Password</th>
+                        <td><input type="password" name="userpwd" maxlength="4" id="userpwd"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" id="btnSubmit" >
+                            <button type="button" value="Delete" id="deleteData">Delete</button>
+                            <button type="button" value="Update" id="updateData">Update</button>
+                            <button type="button" value="goList" id="goList">List</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+    <script src="{% static 'js/rate_detail.js'%}"></script>
+</body>
+</html>
