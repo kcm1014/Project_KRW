@@ -14,10 +14,9 @@
             </span>
         </div>
         <div class="content">
-            <form action="/rate/update_data/" method="POST" id="contentData">
+            <form action="/rate/update/{{ratecontent.pk}}/" method="POST" id="contentData">
                 {% csrf_token %}
                 <input type="hidden" value="{{ratecontent.pk}}" id="pk"/>
-                <input type="hidden" value="{{msg}}" id="msg"/>
                 <table>
                     <colgroup>
                         <col style="width: 112px">
@@ -28,10 +27,12 @@
                     <tr>
                         <th>Category</th>
                         <td>
+                            <input type="hidden" name="" value="{{ratecontent.category.id}}">
                             {{ratecontent.category.category_name}}
                         </td>
                         <th>Sub Category</th>
                         <td>
+                            <input type="hidden" name="" value="{{ratecontent.subcategory.id}}">
                             {{ratecontent.subcategory.subcategory_name}}
                         </td>
                     </tr>

@@ -1,3 +1,10 @@
+body {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+    background-color: #FFFFFF;
+    background-image: url("../img/list.jpg");
+}
 .container {
     /*border: 1px solid red;*/
     width: 100%;

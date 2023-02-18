@@ -44,7 +44,7 @@ def writeData(request):
                      contents=content,userId=userId,userPwd=userPwd)
 
     rc.save()
-
+    # 추가 성공 : 2
     return HttpResponseRedirect(reverse('rate:showResult', args=(rc.pk, 2)))
 
 def getSubcategory(request):
@@ -55,7 +55,6 @@ def getSubcategory(request):
 
 def detail(request,ratecontent_id):
     try:
-
         ratecontent = RateContent.objects.get(pk=ratecontent_id)
     except RateContent.DoesNotExist:
         raise Http404("RateContent does not exist")
@@ -74,6 +73,28 @@ def delete(request,ratecontent_id):
     except RateContent.DoesNotExist:
         raise Http404("RateContent does not exist")
 
+def update(request,ratecontent_id):
+    try:
+        ratecontent = RateContent.objects.get(pk=ratecontent_id)
+        userId = request.POST['userId']
+        userPwd = request.POST['userpwd']
+
+        if (ratecontent.userId == userId and ratecontent.userPwd == userPwd):
+            ratecontent.point01 = int(request.POST['startpoint01'])
+            ratecontent.point02 = int(request.POST['startpoint02'])
+            ratecontent.point03 = int(request.POST['startpoint03'])
+            ratecontent.point04 = int(request.POST['startpoint04'])
+            ratecontent.point05 = int(request.POST['startpoint05'])
+            ratecontent.point06 = int(request.POST['startpoint06'])
+            ratecontent.contents = request.POST['content']
+            ratecontent.save()
+            # 4 수정 성공
+            return HttpResponseRedirect(reverse('rate:showResult', args=(ratecontent_id, 4)))
+        else:
+            # 5 수정 실패
+            return HttpResponseRedirect(reverse('rate:showResult',args=(ratecontent_id,5)))
+    except RateContent.DoesNotExist:
+        raise Http404("RateContent does not exist")
 
 def showResult(request,ratecontent_id,result_code):
     # 1 삭제 성공
