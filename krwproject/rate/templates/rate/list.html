@@ -76,7 +76,7 @@
                     <col style="width: 228px">
                  </colgroup>
                  {% if content_list %}
-                    {% for content in content_list%}
+                    {% for content in page_obj%}
                         <tbody class="itemSelected" >
                             <input type="hidden" value="{{content.pk}}"/>
                              <tr>
@@ -159,6 +159,21 @@
                     </tr>
                  {% endif %}
             </table>
+            <div class = "pageList">
+                <ul style="display: flex;list-style: none" id="pageNumber">
+                    {% for page in paginator.page_range %}
+                        <li style="margin:5px;cursor: pointer" value="{{page}}">{{page}}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div style="display: none">
+                 <form action="/rate/list/" method="POST" id="rateList">
+                      {% csrf_token %}
+                      <input name="page" type="hidden" value="{{page}}" id="currentPage"/>
+                      <input name="categoryId" type="hidden" value="{{categoryId}}" />
+                      <input name="subcategoryId" type="hidden" value="{{subcategoryId}}" />
+                  </form>
+            </div>
         </div>
 
     </div>

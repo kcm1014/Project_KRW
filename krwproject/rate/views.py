@@ -33,7 +33,7 @@ def list(request):
     content_list = RateContent.objects.filter(q).order_by('create_date')
 
 
-    paginator = Paginator(content_list,5)
+    paginator = Paginator(content_list,2)
     try:
         page_obj = paginator.page(page)
     except PageNotAnInteger:
@@ -47,6 +47,7 @@ def list(request):
                'subcategory_list':subcategory_list,
                'content_list':content_list,
                'page_obj':page_obj,
+               'paginator':paginator,
                'page': page,
                'categoryId': categoryId,
                'subcategoryId': subcategoryId

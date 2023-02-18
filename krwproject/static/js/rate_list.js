@@ -10,5 +10,11 @@ $(function (){
     $('#goHome').click(function (){
         location.href = "/";
     });
+
+    $('#pageNumber li').click(function (){
+        $("#currentPage").val($(this).val());
+        $('#rateList').submit();
+    });
+
 });
 
