@@ -16,10 +16,24 @@
           </div>
 
           <div id="bottom_area">
-              <button class="custom-btn btn-5"><a href="/rate/list/"><span>Rate Class</span></a></button>
+              <form action="/rate/list/" method="POST" id="rateList">
+                  {% csrf_token %}
+                  <input name="page" type="hidden" value="1" />
+                  <input name="categoryId" type="hidden" value="" />
+                  <input name="subcategoryId" type="hidden" value="" />
+              </form>
+              <button class="custom-btn btn-5" id="gotoList"><span>Rate Class</span></button>
               <button class="custom-btn btn-5"><a href="/rate/write/"><span>Write Class</span></a></button>
           </div>
       </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+    <script>
+        $(function (){
+             $('#gotoList').click(function (){
+                 $('#rateList').submit();
+             });
+        });
+    </script>
 </body>
 </html>

@@ -31,17 +31,25 @@
                         <tr>
                             <th>Category</th>
                             <td>
-                                <select name="category" id="category">
+                                <select name="categoryId" id="category">
                                     {% for category in category_list%}
-                                         <option value="{{category.id}}">{{category.category_name}}</option>
+                                        {% if categoryId == category.id %}
+                                            <option value="{{category.id}}" selected>{{category.category_name}}</option>
+                                        {% else %}
+                                            <option value="{{category.id}}">{{category.category_name}}</option>
+                                        {% endif %}
                                     {% endfor %}
                                 </select>
                             </td>
                             <th>Sub Category</th>
                             <td>
-                                <select name="subcategory" id="subcategory">
+                                <select name="subcategoryId" id="subcategory">
                                     {% for subcategory in subcategory_list%}
-                                         <option value="{{subcategory.id}}">{{subcategory.subcategory_name}}</option>
+                                        {% if subcategoryId == subcategory.id %}
+                                            <option value="{{subcategory.id}}" selected>{{subcategory.subcategory_name}}</option>
+                                        {% else %}
+                                            <option value="{{subcategory.id}}">{{subcategory.subcategory_name}}</option>
+                                        {% endif %}
                                     {% endfor %}
                                 </select>
                             </td>

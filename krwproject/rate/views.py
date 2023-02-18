@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import Http404
 from django.shortcuts import render
 from django.http import HttpResponse,HttpResponseRedirect
@@ -8,13 +9,48 @@ from django.db.models import Q
 # Create your views here.
 
 def list(request):
+
+
+    page = request.POST['page']
+    categoryId = request.POST['categoryId']
+    subcategoryId = request.POST['subcategoryId']
     category_list = Category.objects.order_by('category_order')
-    subcategory_list = SubCategory.objects.filter(subcategory_id=category_list[0].id).order_by('subcategory_order')
-    q = Q(category=category_list[0].id)
-    q &= Q(subcategory=subcategory_list[0].id)
+    if categoryId =="" and category_list:
+        categoryId = category_list[0].id
+
+    subcategory_list = SubCategory.objects.filter(subcategory_id=categoryId).order_by('subcategory_order')
+    if subcategoryId == "" and subcategory_list:
+        subcategoryId = subcategory_list[0].id
+
+
+    q = Q()
+    if categoryId != "":
+        q &= Q(category=categoryId)
+
+    if subcategoryId != "":
+        q &= Q(subcategory=subcategoryId)
+
     content_list = RateContent.objects.filter(q).order_by('create_date')
 
-    context = {'category_list': category_list,'subcategory_list':subcategory_list,'content_list':content_list}
+
+    paginator = Paginator(content_list,5)
+    try:
+        page_obj = paginator.page(page)
+    except PageNotAnInteger:
+        page = 1
+        page_obj = paginator.page(page)
+    except EmptyPage:
+        page = paginator.num_pages
+        page_obj = paginator.page(page)
+
+    context = {'category_list': category_list,
+               'subcategory_list':subcategory_list,
+               'content_list':content_list,
+               'page_obj':page_obj,
+               'page': page,
+               'categoryId': categoryId,
+               'subcategoryId': subcategoryId
+               }
 
     return render(request,'rate/list.html',context)
 
