@@ -84,13 +84,15 @@
               alert("패스워드를 입력하세요!");
              return;
          }
-
-         $('#dataWrite').submit();
+         var rlt = confirm('등록하시겠습니까?');
+         if(rlt) {
+             $('#dataWrite').submit();
+         }
     });
 
     $('#goList').click(function (){
-        console.log("ok");
-        location.href = "/rate/list/";
+        $("#rateList").attr("action","/rate/list/");
+        $("#rateList").submit();
     });
 
   });

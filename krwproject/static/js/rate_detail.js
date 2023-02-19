@@ -1,49 +1,55 @@
 $(function (){
     $('#goList').click(function (){
-        location.href = "/rate/list/";
+        $('#rateList').attr('action',"/rate/list/");
+        $('#rateList').submit();
     });
 
      $('#deleteData').click(function (){
-        if($('#userId').val().trim()==""){
+        if($('#contentData #userId').val().trim()==""){
               alert("작성자 이름을 입력하세요!");
              return;
          }
 
-         if($('#userpwd').val().trim()==""){
+         if($('#contentData #userpwd').val().trim()==""){
               alert("패스워드를 입력하세요!");
              return;
          }
          var rlt = confirm('삭제하시겠습니까?');
          if(rlt){
-             $("#contentData").attr("action","/rate/delete/" + $('#pk').val() + "/");
-             $('#contentData').submit();
+             $('#rateList').attr('action',"/rate/delete/");
+             $("#rateList #pk").val($("#contentData #pk").val());
+             $("#rateList #userId").val($("#contentData #userId").val());
+             $("#rateList #userpwd").val($("#contentData #userpwd").val());
+
+             $('#rateList').submit();
          }
+
     });
 
      $('#updateData').click(function (){
          let count = 0;
-         if($('#startpoint01').val()=='0') count++;
-         if($('#startpoint02').val()=='0') count++;
-         if($('#startpoint03').val()=='0') count++;
-         if($('#startpoint04').val()=='0') count++;
-         if($('#startpoint05').val()=='0') count++;
-         if($('#startpoint06').val()=='0') count++;
+         if($('#contentData #startpoint01').val()=='0') count++;
+         if($('#contentData #startpoint02').val()=='0') count++;
+         if($('#contentData #startpoint03').val()=='0') count++;
+         if($('#contentData #startpoint04').val()=='0') count++;
+         if($('#contentData #startpoint05').val()=='0') count++;
+         if($('#contentData #startpoint06').val()=='0') count++;
          if(count > 3){
              alert("3개 이상의 별점을 선택하세요!");
              return;
          }
 
-         if($('#content').val().trim()==""){
+         if($('#contentData #content').val().trim()==""){
               alert("작성 내용을 입력하세요!");
              return;
          }
 
-         if($('#userId').val().trim()==""){
+         if($('#contentData #userId').val().trim()==""){
               alert("작성자 이름을 입력하세요!");
              return;
          }
 
-         if($('#userpwd').val().trim()==""){
+         if($('#contentData #userpwd').val().trim()==""){
               alert("패스워드를 입력하세요!");
              return;
          }
@@ -53,8 +59,6 @@ $(function (){
              $('#contentData').submit();
          }
     });
-
-
 });
 
 

@@ -9,19 +9,16 @@ from django.db.models import Q
 # Create your views here.
 
 def list(request):
-
-
     page = request.POST['page']
     categoryId = request.POST['categoryId']
     subcategoryId = request.POST['subcategoryId']
     category_list = Category.objects.order_by('category_order')
-    if categoryId =="" and category_list:
+    if categoryId == "" and category_list:
         categoryId = category_list[0].id
 
     subcategory_list = SubCategory.objects.filter(subcategory_id=categoryId).order_by('subcategory_order')
     if subcategoryId == "" and subcategory_list:
         subcategoryId = subcategory_list[0].id
-
 
     q = Q()
     if categoryId != "":
@@ -57,14 +54,19 @@ def list(request):
 
 
 def write(request):
+    page = request.POST['page']
+    categoryId = request.POST['categoryId']
+    subcategoryId = request.POST['subcategoryId']
+
     category_list = Category.objects.order_by('category_order')
     subcategory_list = SubCategory.objects.filter(subcategory_id=category_list[0].id).order_by('subcategory_order')
-    context = {'category_list': category_list, 'subcategory_list': subcategory_list}
+    context = {'category_list': category_list, 'subcategory_list': subcategory_list,
+               'page':page,'categoryId':categoryId,'subcategoryId':subcategoryId}
     return render(request,'rate/write.html',context)
 
 def writeData(request):
-    categoryId = request.POST['category']
-    subCategoryId = request.POST['subcategory']
+    categoryId = request.POST['categoryId']
+    subCategoryId = request.POST['subcategoryId']
     startpoint01 = request.POST['startpoint01']
     startpoint02 = request.POST['startpoint02']
     startpoint03 = request.POST['startpoint03']
@@ -82,7 +84,28 @@ def writeData(request):
 
     rc.save()
     # 추가 성공 : 2
-    return HttpResponseRedirect(reverse('rate:showResult', args=(rc.pk, 2)))
+    page = 0
+    categoryId = 0
+    subcategoryId = 0
+    try:
+        page = int(request.POST['page'])
+    except:
+        page = 0
+
+    try:
+        categoryId = int(request.POST['categoryId'])
+    except:
+        categoryId = 0
+
+    try:
+        subcategoryId = int(request.POST['subcategoryId'])
+    except:
+        subcategoryId = 0
+
+
+
+    return HttpResponseRedirect(
+        reverse('rate:showResult', args=(page, categoryId, subcategoryId, 0, 2)))
 
 def getSubcategory(request):
     subcategory_list = SubCategory.objects.filter(subcategory_id=request.GET['id']).order_by('subcategory_order')
@@ -90,27 +113,44 @@ def getSubcategory(request):
     return HttpResponse(data,content_type="text/json-comment-filtered")
 
 
-def detail(request,ratecontent_id):
+def detail(request):
+    ratecontent_id = request.POST['pk']
+    page = request.POST['page']
+    categoryId = request.POST['categoryId']
+    subcategoryId = request.POST['subcategoryId']
+
     try:
         ratecontent = RateContent.objects.get(pk=ratecontent_id)
     except RateContent.DoesNotExist:
         raise Http404("RateContent does not exist")
-    return render(request, 'rate/detail.html', {'ratecontent': ratecontent})
+    return render(request, 'rate/detail.html', {'ratecontent': ratecontent,
+                                                'page':page,'categoryId':categoryId,
+                                                'subcategoryId':subcategoryId})
 
-def delete(request,ratecontent_id):
+def delete(request):
+    ratecontent_id = int(request.POST['pk'])
+    page = int(request.POST['page'])
+    categoryId = int(request.POST['categoryId'])
+    subcategoryId = int(request.POST['subcategoryId'])
     try:
         ratecontent = RateContent.objects.get(pk=ratecontent_id)
         userId = request.POST['userId']
         userPwd = request.POST['userpwd']
         if (ratecontent.userId == userId and ratecontent.userPwd == userPwd):
             ratecontent.delete()
-            return HttpResponseRedirect(reverse('rate:showResult', args=(ratecontent_id, 1)))
+            return HttpResponseRedirect(
+                reverse('rate:showResult', args=(page, categoryId, subcategoryId, ratecontent_id, 1)))
         else:
-            return HttpResponseRedirect(reverse('rate:showResult',args=(ratecontent_id,0)))
+            return HttpResponseRedirect(
+                reverse('rate:showResult', args=(page, categoryId, subcategoryId, ratecontent_id, 0)))
     except RateContent.DoesNotExist:
         raise Http404("RateContent does not exist")
 
-def update(request,ratecontent_id):
+def update(request):
+    ratecontent_id = int(request.POST['pk'])
+    page = int(request.POST['page'])
+    categoryId = int(request.POST['categoryId'])
+    subcategoryId = int(request.POST['subcategoryId'])
     try:
         ratecontent = RateContent.objects.get(pk=ratecontent_id)
         userId = request.POST['userId']
@@ -126,16 +166,20 @@ def update(request,ratecontent_id):
             ratecontent.contents = request.POST['content']
             ratecontent.save()
             # 4 수정 성공
-            return HttpResponseRedirect(reverse('rate:showResult', args=(ratecontent_id, 4)))
+            return HttpResponseRedirect(reverse('rate:showResult', args=(page,categoryId,subcategoryId,ratecontent_id, 4)))
         else:
             # 5 수정 실패
-            return HttpResponseRedirect(reverse('rate:showResult',args=(ratecontent_id,5)))
+            return HttpResponseRedirect(reverse('rate:showResult',args=(page,categoryId,subcategoryId,ratecontent_id, 5)))
     except RateContent.DoesNotExist:
         raise Http404("RateContent does not exist")
 
-def showResult(request,ratecontent_id,result_code):
+def showResult(request,page,categoryId,subcategoryId,ratecontent_id,result_code):
     # 1 삭제 성공
     # 0 삭제 실패
-    context = {'ratecontent_id': ratecontent_id, 'result_code': result_code}
+    context = {'ratecontent_id': ratecontent_id,
+               'result_code': result_code,
+               'page':page,
+               'categoryId':categoryId,
+               'subcategoryId':subcategoryId}
     return render(request, 'rate/result.html', context)
 

@@ -169,9 +169,10 @@
             <div style="display: none">
                  <form action="/rate/list/" method="POST" id="rateList">
                       {% csrf_token %}
-                      <input name="page" type="hidden" value="{{page}}" id="currentPage"/>
-                      <input name="categoryId" type="hidden" value="{{categoryId}}" />
-                      <input name="subcategoryId" type="hidden" value="{{subcategoryId}}" />
+                     <input name="page" type="hidden" value="{{page}}" id="currentPage"/>
+                     <input name="categoryId" type="hidden" value="{{categoryId}}" />
+                     <input name="subcategoryId" type="hidden" value="{{subcategoryId}}" />
+                     <input name="pk" type="hidden" value="" id="pk"/>
                   </form>
             </div>
         </div>

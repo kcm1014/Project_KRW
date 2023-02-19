@@ -8,6 +8,13 @@
 <body>
 <input type="hidden" value="{{ratecontent_id}}" id="ratecontentId" />
 <input type="hidden" value="{{result_code}}" id="resultCode" />
+<form action="/rate/list/" method="POST" id="rateList">
+  {% csrf_token %}
+  <input name="page" type="hidden" value="{{page}}" id="currentPage"/>
+  <input name="categoryId" type="hidden" value="{{categoryId}}" />
+  <input name="subcategoryId" type="hidden" value="{{subcategoryId}}" />
+  <input name="pk" value="{{ratecontent_id}}" id="pk" type="hidden"/>
+</form>
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 <script src="{% static 'js/rate_result.js'%}"></script>
 </body>

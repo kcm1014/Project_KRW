@@ -14,9 +14,12 @@
             </span>
         </div>
         <div class="content">
-            <form action="/rate/update/{{ratecontent.pk}}/" method="POST" id="contentData">
+            <form action="/rate/update/" method="POST" id="contentData">
                 {% csrf_token %}
-                <input type="hidden" value="{{ratecontent.pk}}" id="pk"/>
+                <input type="hidden" name="pk" value="{{ratecontent.pk}}" id="pk"/>
+                <input name="page" type="hidden" value="{{page}}" id="currentPage"/>
+                <input name="categoryId" type="hidden" value="{{categoryId}}" />
+                <input name="subcategoryId" type="hidden" value="{{subcategoryId}}" />
                 <table>
                     <colgroup>
                         <col style="width: 112px">
@@ -27,12 +30,12 @@
                     <tr>
                         <th>Category</th>
                         <td>
-                            <input type="hidden" name="" value="{{ratecontent.category.id}}">
+                            <input type="hidden" name="categoryId" value="{{ratecontent.category.id}}">
                             {{ratecontent.category.category_name}}
                         </td>
                         <th>Sub Category</th>
                         <td>
-                            <input type="hidden" name="" value="{{ratecontent.subcategory.id}}">
+                            <input type="hidden" name="subcategoryId" value="{{ratecontent.subcategory.id}}">
                             {{ratecontent.subcategory.subcategory_name}}
                         </td>
                     </tr>
@@ -115,6 +118,17 @@
                 </table>
             </form>
         </div>
+    </div>
+    <div style="display: none">
+         <form action="/rate/list/" method="POST" id="rateList">
+              {% csrf_token %}
+              <input name="page" type="hidden" value="{{page}}" id="currentPage"/>
+              <input name="categoryId" type="hidden" value="{{categoryId}}" />
+              <input name="subcategoryId" type="hidden" value="{{subcategoryId}}" />
+              <input name="pk" value="" id="pk"/>
+              <input type="text" name="userId" maxlength="20" id="userId">
+              <input type="password" name="userpwd" maxlength="4" id="userpwd">
+          </form>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
     <script src="{% static 'js/rate_detail.js'%}"></script>

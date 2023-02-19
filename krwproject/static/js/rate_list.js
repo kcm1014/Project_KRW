@@ -1,10 +1,14 @@
 $(function (){
     $(".itemSelected").on('dblclick', 'td', function () {
-        location.href="/rate/detail/" + $(this).parent().parent().children('input').val()
+        $("#pk").val($(this).parent().parent().children('input').val());
+        $('#rateList').attr("action","/rate/detail/");
+        $('#rateList').submit();
+        //location.href="/rate/detail/" + $(this).parent().parent().children('input').val()
     });
 
     $('#writeData').click(function (){
-        location.href = "/rate/write/";
+        $("#rateList").attr("action","/rate/write/");
+        $("#rateList").submit();
     });
 
     $('#goHome').click(function (){
