@@ -10,9 +10,7 @@
     <div class="container">
         <div class="logo">
             <span class="logText">
-                <button type="button" value="goHome" id="goHome" style="float: left;margin-left: 5px;" >Home</button>
                Rate List
-                <button type="button" value="writeData" id="writeData" style="float: right;margin-right: 5px;" >Write</button>
             </span>
         </div>
         <div class="content">
@@ -54,10 +52,19 @@
                                 </select>
                             </td>
                             <td>
-                                <input type="radio" value="asending" name="sort" id="sortAsending" checked>
+                                {% if sort == 'A' %}
+                                    <input type="radio" value="A" name="sort" id="sortAsending" checked>
+                                {% else %}
+                                     <input type="radio" value="A" name="sort" id="sortAsending">
+                                {% endif %}
                                     <label for="sortAsending">Latest</label>
-                                <input type="radio" value="descending" name="sort" id="sortDescending">
-                                    <label for="sortDescending">Old</label>
+
+                                {% if sort == 'D' %}
+                                    <input type="radio" value="D" name="sort" id="sortDescending" checked>
+                                {% else %}
+                                     <input type="radio" value="D" name="sort" id="sortDescending">
+                                {% endif %}
+                                     <label for="sortDescending">Old</label>
                             </td>
                             <td>
                                 <button type="button" value="Search" id="Search">Search</button>
@@ -160,19 +167,33 @@
                  {% endif %}
             </table>
             <div class = "pageList">
-                <ul style="display: flex;list-style: none" id="pageNumber">
-                    {% for page in paginator.page_range %}
-                        <li style="margin:5px;cursor: pointer" value="{{page}}">{{page}}</li>
+                <button type="button" value="goHome" id="goHome" style="float: right;margin-right: 5px;" >Home</button>
+                <button type="button" value="writeData" id="writeData" style="float: right;margin-right: 5px;" >Write</button>
+                <ul style="list-style: none;text-align: center;margin: 0 auto;" id="pageNumber">
+                    {% for page in custom_range %}
+                        <li style="margin:5px;cursor: pointer;text-align: center;display:inline-block;" value="{{page}}">
+                            {% if page == page_obj.number %}
+                                <span style="text-decoration: none;color: red">
+                                    {{page}}
+                                </span>
+                            {% else %}
+                                <span style="text-decoration: none;color: black">
+                                    {{page}}
+                                </span>
+                            {% endif %}
+                        </li>
                     {% endfor %}
                 </ul>
+
             </div>
             <div style="display: none">
                  <form action="/rate/list/" method="POST" id="rateList">
                       {% csrf_token %}
                      <input name="page" type="hidden" value="{{page}}" id="currentPage"/>
-                     <input name="categoryId" type="hidden" value="{{categoryId}}" />
-                     <input name="subcategoryId" type="hidden" value="{{subcategoryId}}" />
+                     <input name="categoryId"  id="categoryId" type="hidden" value="{{categoryId}}" />
+                     <input name="subcategoryId"  id="subcategoryId" type="hidden" value="{{subcategoryId}}" />
                      <input name="pk" type="hidden" value="" id="pk"/>
+                     <input name="sort" type="hidden" value="{{sort}}" id="sort"/>
                   </form>
             </div>
         </div>

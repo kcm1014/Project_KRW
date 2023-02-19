@@ -1,7 +1,6 @@
 body {
     margin: 0;
     height: 100%;
-    overflow: hidden;
     background-color: #FFFFFF;
     background-image: url("../img/list.jpg");
 }
@@ -150,6 +149,8 @@ button {
   }
 
 .pageList{
+    border-top: 2px solid black;
     margin: 10px auto ;
     background-color: #FFFFFF;
+    padding: 5px;
 }
