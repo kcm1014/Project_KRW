@@ -1,7 +1,7 @@
 $(function (){
     let result = $("#resultCode").val();
     if(result == "0"){
-        alert("사용자 이름 또는 패스워드가 일치하지 않습니다!");
+        alert("User name or password does not match!");
         $("#rateList").attr("action","/rate/detail/");
         $("#rateList").submit();
     }else if(result=="1"){
