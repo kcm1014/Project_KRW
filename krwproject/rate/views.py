@@ -39,7 +39,7 @@ def list(request):
         content_list = RateContent.objects.filter(q).order_by('create_date')
 
 
-    paginator = Paginator(content_list,5)  # 한페이지에 보여줄 목록 개수
+    paginator = Paginator(content_list,5)  # 한페이지에 보여줄 목록 개수 나는 강령원이다.
     try:
         page_obj = paginator.page(page)
     except PageNotAnInteger:
