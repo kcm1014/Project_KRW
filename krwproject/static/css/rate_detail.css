@@ -1,7 +1,6 @@
 body {
     margin: 0;
     height: 100%;
-    overflow: hidden;
     background-color: #FFFFFF;
     background-image: url("../img/journal.jpg");
 }

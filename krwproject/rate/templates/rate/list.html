@@ -3,14 +3,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Rate List</title>
+    <title>Comment List</title>
     <link rel="stylesheet" href="{% static 'css/rate_list.css'%}">
 </head>
 <body>
     <div class="container">
         <div class="logo">
             <span class="logText">
-               Rate List
+               Comment List
             </span>
         </div>
         <div class="content">
@@ -27,7 +27,7 @@
                             <col style="width: 100px">
                         </colgroup>
                         <tr>
-                            <th>Category</th>
+                            <th>Disclipline</th>
                             <td>
                                 <select name="categoryId" id="category">
                                     {% for category in category_list%}
@@ -39,7 +39,7 @@
                                     {% endfor %}
                                 </select>
                             </td>
-                            <th>Sub Category</th>
+                            <th>Course</th>
                             <td>
                                 <select name="subcategoryId" id="subcategory">
                                     {% for subcategory in subcategory_list%}
@@ -93,9 +93,9 @@
                                  <td colspan="6" style="height: 1px;background: black;"></td>
                              </tr>
                             <tr>
-                                <th>Category</th>
+                                <th>Discipline</th>
                                 <td>{{content.category.category_name}}</td>
-                                <th>Sub Category</th>
+                                <th>Course</th>
                                 <td>{{content.subcategory.subcategory_name}}</td>
                                 <th>Write Date</th>
                                 <td>{{content.create_date}}</td>
@@ -105,9 +105,10 @@
                                   <td colspan="5">
                                       <div class="starpoint">workload<br>(daily HW)</div>
                                       <div class="starpoint">Test Frequency</div>
-                                      <div class="starpoint">Strictness</div>
-                                      <div class="starpoint">class material</div>
-                                      <div class="starpoint">Standarized</div>
+                                      <div class="starpoint"><p>Strictness
+                                            <span style="font-size: 0.8em"><br>(instructor, deadline, etc)</span></p></div>
+                                      <div class="starpoint">Engagingness</div>
+                                      <div class="starpoint" style="font-size: 0.9em">Prep For Standardized <br> Test(AP)</div>
                                       <div class="starpoint">Use of Tech</div>
                                   </td>
                              </tr>
