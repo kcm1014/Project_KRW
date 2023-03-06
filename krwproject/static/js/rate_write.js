@@ -84,6 +84,21 @@
               alert("패스워드를 입력하세요!");
              return;
          }
+
+         if($('#schPwd').val().trim()==""){
+              alert("학교 인증 패스워드를 입력하세요!");
+             return;
+         }
+        if($('#chkPwd').val().trim()=="notExist"){
+            alert("학교 인증 패스워드가 발급되지 않은 상태입니다");
+             return;
+        }
+         if($('#schPwd').val().trim()!=$('#chkPwd').val().trim()){
+              alert("학교 인증 패스워드가 일치 하지 않습니다!");
+             return;
+         }
+
+
          var rlt = confirm('등록하시겠습니까?');
          if(rlt) {
              $('#dataWrite').submit();

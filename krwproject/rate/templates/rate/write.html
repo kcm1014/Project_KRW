@@ -19,6 +19,7 @@
                 <input name="page" type="hidden" value="{{page}}" id="currentPage"/>
                 <input name="sort" type="hidden" value="{{sort}}" />
                 <input name="pk" type="hidden" value="" id="pk"/>
+                <input name="chkPwd" type="hidden" value="{{chkPwd}}" id="chkPwd"/>
                 <table>
                     <colgroup>
                         <col style="width: 112px">
@@ -113,6 +114,12 @@
                         <td><input type="text" name="userId" maxlength="20" id="userId"></td>
                         <th>Password</th>
                         <td><input type="password" name="userpwd" maxlength="4" id="userpwd"></td>
+                    </tr>
+                    <tr>
+                        <th>SchP</th>
+                        <td><input type="text" name="schPwd" maxlength="20" id="schPwd"></td>
+                        <td></td>
+                        <td></td>
                     </tr>
                     <tr>
                         <td colspan="4" id="btnSubmit" >

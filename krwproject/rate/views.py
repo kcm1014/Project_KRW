@@ -2,7 +2,7 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import Http404
 from django.shortcuts import render
 from django.http import HttpResponse,HttpResponseRedirect
-from .models import Category, SubCategory, RateContent
+from .models import Category, SubCategory, RateContent,SchoolPwd
 from django.core import serializers
 from django.urls import reverse
 from django.db.models import Q
@@ -32,6 +32,9 @@ def list(request):
 
     if subcategoryId != "":
         q &= Q(subcategory=subcategoryId)
+
+
+    q &= Q(isApproval=True)
 
     if(sortStr=="A"):
         content_list = RateContent.objects.filter(q).order_by('-create_date')
@@ -80,16 +83,20 @@ def write(request):
     subcategoryId = request.POST['subcategoryId']
     sort = request.POST['sort']
 
+    toDayschPwd = SchoolPwd.objects.order_by('-create_date')[:1]
+    schPwd = 'notExist'
+    if len(toDayschPwd) == 1:
+        schPwd = toDayschPwd[0].schPwd
+
     category_list = Category.objects.order_by('category_order')
     subcategory_list = SubCategory.objects.filter(subcategory_id=category_list[0].id).order_by('subcategory_order')
-    context = {'category_list': category_list, 'subcategory_list': subcategory_list,
+    context = {'category_list': category_list, 'subcategory_list': subcategory_list,'chkPwd':schPwd,
                'page':page,'categoryId':categoryId,'subcategoryId':subcategoryId,'sort':sort}
     return render(request,'rate/write.html',context)
 
 def writeData(request):
     categoryId = request.POST['categoryId']
     subCategoryId = request.POST['subcategoryId']
-    sort = request.POST['sort']
     startpoint01 = request.POST['startpoint01']
     startpoint02 = request.POST['startpoint02']
     startpoint03 = request.POST['startpoint03']
@@ -100,16 +107,20 @@ def writeData(request):
     content = request.POST['content']
     userId =  request.POST['userId']
     userPwd =  request.POST['userpwd']
+    schPwd = request.POST['schPwd']
 
     rc = RateContent(category_id=categoryId,subcategory_id=subCategoryId,point01=startpoint01,point02=startpoint02,
-                     point03=startpoint03,point04=startpoint04,point05=startpoint05,point06=startpoint06,
-                     contents=content,userId=userId,userPwd=userPwd)
+                 point03=startpoint03,point04=startpoint04,point05=startpoint05,point06=startpoint06,
+                 contents=content,userId=userId,userPwd=userPwd,schPwd_id = schPwd)
 
     rc.save()
     # 추가 성공 : 2
     page = 0
     categoryId = 0
     subcategoryId = 0
+
+    sort = request.POST['sort']
+
     try:
         page = int(request.POST['page'])
     except:
@@ -124,7 +135,6 @@ def writeData(request):
         subcategoryId = int(request.POST['subcategoryId'])
     except:
         subcategoryId = 0
-
 
 
     return HttpResponseRedirect(

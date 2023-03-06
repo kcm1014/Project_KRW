@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, SubCategory, RateContent
+from .models import Category, SubCategory, RateContent, SchoolPwd
 
 class SubCategooryInline(admin.StackedInline):
     model = SubCategory
@@ -16,3 +16,4 @@ class CategoryAdmin(admin.ModelAdmin):
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(SubCategory)
 admin.site.register(RateContent)
+admin.site.register(SchoolPwd)
