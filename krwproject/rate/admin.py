@@ -5,7 +5,10 @@ class SubCategooryInline(admin.StackedInline):
     model = SubCategory
     extra = 5
 
+@admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
+    list_display = ['id', 'category_order', 'category_name', 'pub_date']
+
     fieldsets = [
         ('Category Order', {'fields': ['category_order']}),
         (None,               {'fields': ['category_name']}),
@@ -13,7 +16,19 @@ class CategoryAdmin(admin.ModelAdmin):
     ]
     inlines = [SubCategooryInline]
 
-admin.site.register(Category, CategoryAdmin)
-admin.site.register(SubCategory)
-admin.site.register(RateContent)
-admin.site.register(SchoolPwd)
+@admin.register(SubCategory)
+class SubCategoryAdmin(admin.ModelAdmin):
+    list_display = ['id', 'subcategory_order', 'subcategory_name', 'subcategory']
+
+@admin.register(RateContent)
+class RateContentAddmin(admin.ModelAdmin):
+    list_display = ['id','category','subcategory','isApproval','create_date', 'point01', 'point02','point03','point04','point05','point06','contents','userId','userPwd','schPwd']
+
+@admin.register(SchoolPwd)
+class SchoolPwdAdmin(admin.ModelAdmin):
+    list_display = ['id', 'create_date', 'schPwd']
+#,
+#admin.site.register(Category, CategoryAdmin)
+#admin.site.register(SubCategory)
+#admin.site.register(RateContent)
+#admin.site.register(SchoolPwd)
