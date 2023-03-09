@@ -6,15 +6,15 @@ $(function (){
 
      $('#deleteData').click(function (){
         if($('#contentData #userId').val().trim()==""){
-              alert("작성자 이름을 입력하세요!");
+              alert("Please enter your name");
              return;
          }
 
          if($('#contentData #userpwd').val().trim()==""){
-              alert("패스워드를 입력하세요!");
+              alert("Please enter your password!");
              return;
          }
-         var rlt = confirm('삭제하시겠습니까?');
+         var rlt = confirm('Are you sure you want to delete ?');
          if(rlt){
              $('#rateList').attr('action',"/rate/delete/");
              $("#rateList #pk").val($("#contentData #pk").val());
@@ -35,26 +35,26 @@ $(function (){
          if($('#contentData #startpoint05').val()=='0') count++;
          if($('#contentData #startpoint06').val()=='0') count++;
          if(count > 3){
-             alert("3개 이상의 별점을 선택하세요!");
+             alert("Select at least 3 stars!");
              return;
          }
 
          if($('#contentData #content').val().trim()==""){
-              alert("작성 내용을 입력하세요!");
+              alert("Please enter your fill-in!");
              return;
          }
 
          if($('#contentData #userId').val().trim()==""){
-              alert("작성자 이름을 입력하세요!");
+              alert("Please enter your name!");
              return;
          }
 
          if($('#contentData #userpwd').val().trim()==""){
-              alert("패스워드를 입력하세요!");
+              alert("Please enter your password!");
              return;
          }
 
-         var rlt = confirm('수정하시겠습니까?');
+         var rlt = confirm('Are you sure you want to update?');
          if(rlt){
              $('#contentData').submit();
          }

@@ -49,12 +49,12 @@
     $('#writeData').click(function (){
         //카테고리 정보
         if($('#category option:selected').val() == "empty"){
-            alert("카테고리를 선택하세요!");
+            alert("Select a category!");
             return;
         }
 
          if($('#subcategory option:selected').val() == ""){
-            alert("서브 카테고리를 선택하세요!");
+            alert("Select a subcategoory");
             return;
         }
 
@@ -66,40 +66,40 @@
          if($('#startpoint05').val()=='0') count++;
          if($('#startpoint06').val()=='0') count++;
          if(count > 3){
-             alert("3개 이상의 별점을 선택하세요!");
+             alert("Select a least 3 stars!");
              return;
          }
 
          if($('#content').val().trim()==""){
-              alert("작성 내용을 입력하세요!");
+              alert("Please Enter yoour fill-in!");
              return;
          }
 
          if($('#userId').val().trim()==""){
-              alert("작성자 이름을 입력하세요!");
+              alert("Please enter your name");
              return;
          }
 
          if($('#userpwd').val().trim()==""){
-              alert("패스워드를 입력하세요!");
+              alert("Please enter your password!");
              return;
          }
 
          if($('#schPwd').val().trim()==""){
-              alert("학교 인증 패스워드를 입력하세요!");
+              alert("Enter your school authentication password!");
              return;
          }
         if($('#chkPwd').val().trim()=="notExist"){
-            alert("학교 인증 패스워드가 발급되지 않은 상태입니다");
+            alert("School authentication password has noot been issued");
              return;
         }
          if($('#schPwd').val().trim()!=$('#chkPwd').val().trim()){
-              alert("학교 인증 패스워드가 일치 하지 않습니다!");
+              alert("Shcool authentication passwords do not match!");
              return;
          }
 
 
-         var rlt = confirm('등록하시겠습니까?');
+         var rlt = confirm('Are you sure want to upload?');
          if(rlt) {
              $('#dataWrite').submit();
          }
