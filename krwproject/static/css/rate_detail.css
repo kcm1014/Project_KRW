@@ -1,9 +1,32 @@
+@font-face {
+    font-family: 'SDSamliphopangche_Outline';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/SDSamliphopangche_Outline.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'GyeonggiBatang';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/GyeonggiBatang.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+th{
+    font-family:SDSamliphopangche_Outline ;
+}
+
+.myContents{
+    font-family:GyeonggiBatang ;
+    font-size: medium;
+}
 body {
     margin: 0;
     height: 100%;
     background-color: #FFFFFF;
     background-image: url("../img/journal.jpg");
 }
+
 
 .container {
     /*border: 1px solid red;*/
@@ -32,7 +55,7 @@ body {
 .content {
     border: 1px solid blue;
     width: 1024px;
-    height: 600px;
+    height: 620px;
     margin: 10px auto ;
     background-color: #FFFFFF;
 }
