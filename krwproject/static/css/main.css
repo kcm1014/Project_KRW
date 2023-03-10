@@ -6,8 +6,10 @@
 }
 
 body {
-    background-image: url("../img/university.jpg");
+    background-image: url("../img/classroom.jpg");
     font-family: GyeonggiBatang;
+    background-repeat : no-repeat;
+    background-size : cover;
 }
 
 a {
@@ -91,7 +93,7 @@ a {
   height: 40px;
   padding: 10px 25px;
   border: 2px solid #000;
-  font-family: 'Lato', sans-serif;
+  font-family: GyeonggiBatang;
   font-weight: 500;
   background: transparent;
   cursor: pointer;

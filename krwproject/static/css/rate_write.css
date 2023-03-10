@@ -25,7 +25,10 @@ body {
     margin: 0;
     height: 100%;
     background-color: #FFFFFF;
-    background-image: url("../img/journal.jpg");
+    background-image: url("../img/write.jpg");
+    background-repeat : no-repeat;
+    background-size : cover;
+    font-family:GyeonggiBatang ;
 }
 
 .container {
@@ -55,7 +58,7 @@ body {
 .content {
     border: 1px solid blue;
     width: 1024px;
-    height: 630px;
+    height: 645px;
     margin: 10px auto ;
     background-color: #FFFFFF;
 }
@@ -80,7 +83,7 @@ select {
     width: 200px;
     padding: .4em .1em .4em .5em;
     border: 1px solid #999;
-    font-family: inherit;
+    font-family: GyeonggiBatang;
     background: url('../img/arrow.jpg') no-repeat 95% 50%;
     border-radius: 0px;
     -webkit-appearance: none;
@@ -138,11 +141,11 @@ select {
   }
 
   textarea {
-      width: 1013px;
+      width: 99%;
   }
 
   input {
-      width: 395px;
+      width: 90%;
       padding: .4em .1em .4em .5em;
   }
 
